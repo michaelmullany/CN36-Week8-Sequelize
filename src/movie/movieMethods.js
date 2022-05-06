@@ -1,6 +1,7 @@
 const Movie = require("./movieTable");
 
 exports.addMovie = async (movieObj) => {
+    console.log(movieObj);
     try {
         await Movie.create(movieObj);
     } catch (error) {

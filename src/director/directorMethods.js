@@ -17,10 +17,18 @@ exports.listDirectors = async () => {
 }
 
 exports.getDirectorId = async (condition) => {
-    console.log("In Methods with condition: " + condition)
     try {
+        console.log(condition);
         return await Director.findOne(condition)
-    } catch {
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+exports.updateDirector = async (updateData, condition) => {
+    try {
+        await Director.update(updateData, condition);
+    } catch (error) {
         console.log(error);
     }
 }

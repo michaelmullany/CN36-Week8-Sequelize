@@ -6,6 +6,10 @@ const Director = sequelize.define("Director", {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+    },
+    dob: {
+        type: DataTypes.STRING,
+        defaultValue: "Not Specified",
     }
 });
 

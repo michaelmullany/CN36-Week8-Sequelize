@@ -9,7 +9,9 @@ const Movie = sequelize.define("Movie", {
     },
     year: {
         type: DataTypes.INTEGER,
-        defaultValue: 1900,
+    },
+    rating: {
+        type: DataTypes.INTEGER,
     }
 });
 
