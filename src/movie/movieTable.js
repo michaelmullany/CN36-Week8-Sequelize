@@ -13,15 +13,4 @@ const Movie = sequelize.define("Movie", {
     }
 });
 
-const Director = sequelize.define("Director", {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    }
-});
-
-Director.hasMany(Movie);
-Movie.belongsTo(Director);
-
-module.exports = { Movie, Director };
+module.exports = Movie;

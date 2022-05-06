@@ -1,10 +1,13 @@
-// Could be called app.js
-
 const yargs = require("yargs");
 const { sequelize } = require("./db/connection");
 //imports for CRUD functions
 const { addMovie, listMovies, updateMovie, deleteMovie } = require("./movie/movieMethods");
-const { addDirector, listDirectors, deleteDirector } = require("./movie/directorMethods");
+const { addDirector, getDirectorId, listDirectors, deleteDirector } = require("./director/directorMethods");
+const Movie = require('./movie/movieTable');
+const Director = require('./director/directorTable');
+
+Director.hasMany(Movie);
+Movie.belongsTo(Director);
 
 const app = async (yargsObj) => {
     console.log(yargsObj);
@@ -12,7 +15,10 @@ const app = async (yargsObj) => {
         await sequelize.sync();
         if (yargsObj.add) {
             //add movie to database
-            await addMovie({title: yargsObj.title, year: yargsObj.year, DirectorId: yargsObj.director });
+            console.log("Getting ID for: " + yargsObj.director)
+            const directorObj = await getDirectorId({name: yargsObj.director});
+            console.log("Got ID: " + directorObj.id);
+            await addMovie({title: yargsObj.title, year: yargsObj.year, DirectorId: directorObj.id });
         } else if (yargsObj.adddirector) {
             //add director to database
             await addDirector({name: yargsObj.name});
